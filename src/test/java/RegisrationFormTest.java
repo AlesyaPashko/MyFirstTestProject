@@ -1,42 +1,39 @@
+import org.example.driver.DriverManager;
+import org.example.pages.RegistrationFormPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class RegisrationFormTest {
+public class RegisrationFormTest extends BaseTest {
+
+    protected WebDriver driver;
+    private RegistrationFormPage registrationFormPage;
+
+    @BeforeClass
+    public void preparationForTest() {
+        driver = DriverManager.getDriver();
+        registrationFormPage = new RegistrationFormPage(driver);
+    }
 
     @Test
-    public void CheckRegistrationForm(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+    public void CheckRegistrationForm() {
 
-        WebElement textInputField = driver.findElement(By.id("my-text-id"));
-        textInputField.sendKeys("Банана");
+        registrationFormPage.enterTextInputField("Банана");
+        registrationFormPage.enterPassword("НуОченьСекретныйПароль");
+        registrationFormPage.enterTextarea("Once Upon a Time...");
+        registrationFormPage.clickDropdownSelect();
+        registrationFormPage.clickDropdownSelectOne();
+        registrationFormPage.clickSubmitButton();
 
-        WebElement passwordField = driver.findElement(By.name("my-password"));
-        passwordField.sendKeys("НуОченьСекретныйПароль");
 
-        WebElement textareaField = driver.findElement(By.xpath("//textarea[@rows=\"3\"]"));
-        textareaField.sendKeys("Once Upon a Time...");
-
-        WebElement dropdownSelect = driver.findElement(By.xpath("//*[@class=\"form-select\"]"));
-        dropdownSelect.click();
-
-        WebElement dropdownSelectOne = driver.findElement(By.xpath("//*[@value=\"1\"]"));
-        dropdownSelectOne.click();
-
-        WebElement sublimitButton = driver.findElement(By.xpath("//*[@class=\"btn btn-outline-primary mt-3\"]"));
-        sublimitButton.click();
-
-        WebElement finishPage = driver.findElement(By.xpath("//*[@class=\"col-12 py-2\"]"));
+        WebElement finishPage = driver.findElement(By.xpath("//div[@class=\"col-12 py-2\"]"));
 
 
         Assert.assertTrue(finishPage.getText().contains("Received!"));
-
-        driver.quit();
-
 
 
     }
