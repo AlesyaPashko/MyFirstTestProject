@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class RegisrationFormTest extends BaseTest {
@@ -13,16 +14,21 @@ public class RegisrationFormTest extends BaseTest {
     protected WebDriver driver;
     private RegistrationFormPage registrationFormPage;
 
+    @DataProvider(name = "data-provider")
+    public Object[][] dpMethod(){
+        return new Object[][]{{"Банана"},{"Бумшакалака"}};
+    }
+
     @BeforeClass
     public void preparationForTest() {
         driver = DriverManager.getDriver();
         registrationFormPage = new RegistrationFormPage(driver);
     }
 
-    @Test
-    public void CheckRegistrationForm() {
+    @Test(dataProvider = "data-provider")
+    public void CheckRegistrationForm(String text) {
 
-        registrationFormPage.enterTextInputField("Банана");
+        registrationFormPage.enterTextInputField(text);
         registrationFormPage.enterPassword("НуОченьСекретныйПароль");
         registrationFormPage.enterTextarea("Once Upon a Time...");
         registrationFormPage.clickDropdownSelect();
