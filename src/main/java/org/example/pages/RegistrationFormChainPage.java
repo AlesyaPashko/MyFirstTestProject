@@ -34,45 +34,32 @@ public class RegistrationFormChainPage extends BasePage {
     public RegistrationFormChainPage (WebDriver driver) {
         super(driver);
     }
-
-    public RegistrationFormChainPage enterTextInputField(String firstText){
-        log.info("Enter first text");
-        textInputField.sendKeys(firstText);
-        return this;
-    }
-    public RegistrationFormChainPage enterPassword(String password) {
-        log.info("Enter password");
-        passwordField.sendKeys(password);
-        return this;
+    public WebElement getTextInputField() {
+        return textInputField;
     }
 
-    public RegistrationFormChainPage enterTextarea(String text) {
-        log.info("Enter second text");
-        textareaField.sendKeys(text);
-        return this;
+    public WebElement getPasswordField() {
+        return passwordField;
     }
 
-    public RegistrationFormChainPage clickDropdownSelect() {
-        log.info("Click dropdown select");
-        dropdownSelect.click();
-        return this;
+    public WebElement getTextareaField() {
+        return textareaField;
     }
 
-    public RegistrationFormChainPage clickDropdownSelectOne() {
-        log.info("Click dropdown select one");
-        dropdownSelectOne.click();
-        return this;
+    public WebElement getDropdownSelect() {
+        return dropdownSelect;
     }
 
-    public RegistrationFormChainPage clickSubmitButton() {
-        log.info("Click submit button");
-        submitButton.click();
-        return this;
+    public WebElement getDropdownSelectOne() {
+        return dropdownSelectOne;
     }
 
-    public String getFinishPageText(){
-        log.info("Get finish page text");
-        return finishPageText.getText();
+    public WebElement getSubmitButton() {
+        return submitButton;
+    }
+
+    public WebElement getFinishPageText() {
+        return finishPageText;
     }
 
 }

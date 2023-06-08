@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Банана",
+    "password": "НуОченьСекретныйПароль",
+    "textarea": "Once Upon a Time...",
+    "finishPageText": "Received!"
+  },
+  {
+    "text": "Бумшакалака",
+    "password": "ТеперьЕщеСекретнее",
+    "textarea": "Once Upon a Time...",
+    "finishPageText": "Received!"
+  }
+]

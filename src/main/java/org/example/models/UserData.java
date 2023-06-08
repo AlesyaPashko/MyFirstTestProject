@@ -9,4 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserData {
     String text;
+    String password;
+    String textarea;
+    String finishPageText;
 }

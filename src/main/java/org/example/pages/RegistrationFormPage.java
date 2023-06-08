@@ -13,11 +13,13 @@ public class RegistrationFormPage extends BasePage {
     @FindBy(id = "my-text-id")
     private WebElement textInputField;
 
+
     @FindBy(name = "my-password")
     private WebElement passwordField;
 
     @FindBy(xpath = "//textarea[@rows=\"3\"]")
     private WebElement textareaField;
+
 
     @FindBy(xpath = "//select[@class=\"form-select\"]")
     private WebElement dropdownSelect;
@@ -28,32 +30,40 @@ public class RegistrationFormPage extends BasePage {
     @FindBy(xpath = "//button[@class=\"btn btn-outline-primary mt-3\"]")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//div[@class=\"col-12 py-2\"]")
+    private WebElement finishPageText;
+
     public RegistrationFormPage (WebDriver driver) {
         super(driver);
     }
 
-    public void enterTextInputField(String firstText) {
-        Waiters.waitForVisibility(textInputField);
-        textInputField.sendKeys(firstText);
+    public WebElement getTextInputField() {
+        return textInputField;
     }
 
-    public void enterPassword(String password) {
-        passwordField.sendKeys(password);
+    public WebElement getPasswordField() {
+        return passwordField;
     }
 
-    public void enterTextarea(String text) {
-        textareaField.sendKeys(text);
+    public WebElement getTextareaField() {
+        return textareaField;
     }
 
-    public void clickDropdownSelect() {
-        dropdownSelect.click();
+    public WebElement getDropdownSelect() {
+        return dropdownSelect;
     }
 
-    public void clickDropdownSelectOne() {
-        dropdownSelectOne.click();
+    public WebElement getDropdownSelectOne() {
+        return dropdownSelectOne;
     }
 
-    public void clickSubmitButton() {
-        submitButton.click();
+    public WebElement getSubmitButton() {
+        return submitButton;
     }
+
+    public WebElement getFinishPageText() {
+        return finishPageText;
+    }
+
+
 }

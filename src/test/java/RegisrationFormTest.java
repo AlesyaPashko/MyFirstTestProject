@@ -1,5 +1,8 @@
 import org.example.driver.DriverManager;
+import org.example.models.UserData;
 import org.example.pages.RegistrationFormPage;
+import org.example.steps.RegistrationFormSteps;
+import org.example.utils.JsonReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,34 +15,26 @@ import org.testng.annotations.Test;
 public class RegisrationFormTest extends BaseTest {
 
     protected WebDriver driver;
-    private RegistrationFormPage registrationFormPage;
-
-    @DataProvider(name = "data-provider")
-    public Object[][] dpMethod(){
-        return new Object[][]{{"Банана"},{"Бумшакалака"}};
-    }
+    private RegistrationFormSteps registrationFormSteps;
 
     @BeforeClass
     public void preparationForTest() {
         driver = DriverManager.getDriver();
-        registrationFormPage = new RegistrationFormPage(driver);
+        registrationFormSteps = new RegistrationFormSteps(driver);
     }
 
-    @Test(dataProvider = "data-provider")
-    public void CheckRegistrationForm(String text) {
+    @Test(dataProvider = "userData", dataProviderClass = JsonReader.class)
+    public void CheckRegistrationForm(UserData userData) {
 
-        registrationFormPage.enterTextInputField(text);
-        registrationFormPage.enterPassword("НуОченьСекретныйПароль");
-        registrationFormPage.enterTextarea("Once Upon a Time...");
-        registrationFormPage.clickDropdownSelect();
-        registrationFormPage.clickDropdownSelectOne();
-        registrationFormPage.clickSubmitButton();
-
-
-        WebElement finishPage = driver.findElement(By.xpath("//div[@class=\"col-12 py-2\"]"));
+        registrationFormSteps.enterTextInputField(userData.getText());
+        registrationFormSteps.enterPassword(userData.getPassword());
+        registrationFormSteps.enterTextarea(userData.getTextarea());
+        registrationFormSteps.clickDropdownSelect();
+        registrationFormSteps.clickDropdownSelectOne();
+        registrationFormSteps.clickSubmitButton();
 
 
-        Assert.assertTrue(finishPage.getText().contains("Received!"));
+        Assert.assertTrue(registrationFormSteps.getFinishPageText().contains(userData.getFinishPageText()));
 
 
     }
